@@ -1,10 +1,10 @@
+// @ts-nocheck
 import React from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
-
-export default function VerifyEmail({ status }) {
-    const { post, processing } = useForm();
+import {Head, Link, useForm} from '@inertiajs/inertia-react';
+export default function VerifyEmail({status}: any) {
+    const {post, processing} = useForm();
 
     const submit = (e) => {
         e.preventDefault();
@@ -14,7 +14,7 @@ export default function VerifyEmail({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Email Verification" />
+            <Head title="Email Verification"/>
 
             <div className="mb-4 text-sm text-gray-600">
                 Thanks for signing up! Before getting started, could you verify your email address by clicking on the

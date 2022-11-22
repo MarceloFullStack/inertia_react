@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
