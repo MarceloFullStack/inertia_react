@@ -14,7 +14,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import {Grid} from "@mui/material";
+import {Grid, Button} from "@mui/material";
+import Edit from './Form'
+import { Link } from '@inertiajs/inertia-react';
+import {Inertia} from "@inertiajs/inertia";
+import axios from 'axios';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -33,19 +37,18 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export default function RecipeReviewCard(props: any) {
     const [expanded, setExpanded] = React.useState(false);
-    console.log('props', props);
-
+    const [name, setName] = React.useState();
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const CardItem = () => {
+    const CardItem = (props: any) => {
         return (
             <Card sx={{maxWidth: 345}}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                            R
+                            R {name}
                         </Avatar>
                     }
                     action={
@@ -117,6 +120,7 @@ export default function RecipeReviewCard(props: any) {
             </Card>
         )
     }
+    // @ts-ignore
     return (
         <Grid container
               spacing={0}
@@ -125,15 +129,31 @@ export default function RecipeReviewCard(props: any) {
               justifyContent="center"
               style={{ minHeight: '100vh' }}
         >
-            <Grid item xs={3} md={3}  align={'center'}>
-                <CardItem/>
+            <Grid item xs={12} md={12}  align={'center'}>
+                <Edit/>
             </Grid>
             <Grid item xs={3} md={3}  align={'center'}>
-                <CardItem/>
+                <CardItem name={name}/>
             </Grid>
             <Grid item xs={3} md={3}  align={'center'}>
-                <CardItem/>
+                <CardItem name={name}/>
             </Grid>
+            <Grid item xs={3} md={3}  align={'center'}>
+                <CardItem name={name}/>
+            </Grid>
+
+            {/*<Link href="/form">Form</Link>*/}
+            <Button onClick={()=> {
+                let data = axios.post('/data', {
+                    name: 'Fred',
+                    age: 42
+                }).then((res) => {
+                    console.log('data', res.data)
+                    setName(res.data[0].email)
+                })
+            }}>
+                Test
+            </Button>
         </Grid>
     );
 }
